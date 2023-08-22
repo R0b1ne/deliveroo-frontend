@@ -70,7 +70,10 @@ function App() {
                     <div className="meals-container">
                       {category.meals.map((meal) => {
                         return (
-                          <div key={meal.id} onClick={() => handleSelect(meal)}>
+                          <button
+                            key={meal.id}
+                            onClick={() => handleSelect(meal)}
+                          >
                             <article>
                               <div>
                                 <h3>{meal.title}</h3>
@@ -89,7 +92,7 @@ function App() {
                                 <img src={meal.picture} alt={meal.title} />
                               )}
                             </article>
-                          </div>
+                          </button>
                         );
                       })}
                     </div>
@@ -101,6 +104,7 @@ function App() {
             })}
           </section>
           <section className="col-right">
+            <button>Valider mon panier</button>
             {select.map((orderList, index) => {
               return (
                 <div>
@@ -108,6 +112,14 @@ function App() {
                 </div>
               );
             })}
+            <div>
+              <div>
+                Sous-total
+                {}{" "}
+              </div>
+              <div>Frais de livraison {2.5} €</div>
+            </div>
+            <div>Total</div>
           </section>
         </div>
       </main>
