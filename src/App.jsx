@@ -40,6 +40,21 @@ function App() {
     setSelect(newSelect);
   };
 
+  const handleRemove = (elemCart) => {
+    console.log("-");
+    const newSelect = [...select];
+    const existingItem = newSelect.find((item) => item.id === elemCart.id);
+    //Element dans le tableau? Si oui....
+    if (existingItem.quantity === 1) {
+      const indexOfCart = select.indexOf(existingItem);
+      newSelect.splice(indexOfCart, 1);
+    } else {
+      existingItem.quantity--;
+    }
+    console.log(existingItem.quantity);
+    setSelect(newSelect);
+  };
+
   let total = 0;
   for (let i = 0; i < select.length; i++) {
     total = total + select[i].price * select[i].quantity;
@@ -131,12 +146,26 @@ function App() {
             })}
           </section>
           <section className="Col-right">
-            <button>Valider mon panier</button>
+            <button onClick={() => console.log("clicked")}>
+              Valider mon panier
+            </button>
             <div className="Cart-item">
               {select.map((elemCart, index) => {
                 return (
                   <div key={index}>
+                    <button
+                      className="Edit-meal"
+                      onClick={() => handleRemove(elemCart)}
+                    >
+                      -
+                    </button>
                     <span> {elemCart.quantity}</span>
+                    <button
+                      className="Edit-meal"
+                      onClick={() => handleSelect(elemCart)}
+                    >
+                      +
+                    </button>
                     <span> {elemCart.title} </span>
                     <span> {elemCart.price} €</span>
                   </div>
